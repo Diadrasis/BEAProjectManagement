@@ -105,21 +105,23 @@ namespace BEAProjectManagement
                 dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn2"].Value = this.personID;
             }
 
+            /*
             if (dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn3"].Value == System.DBNull.Value)
             {
                 MessageBox.Show("Πρέπει να καταχωρήσετε ημερομηνία!");
                 dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn3"].Value = new DateTime(2015 ,1,1);
               }
+              */
 
             if (dgv.Rows[e.RowIndex].Cells["personcostMonthSalary"].Value == System.DBNull.Value)
             {
-                MessageBox.Show("Πρέπει να καταχωρήσετε την μηνιαίο μισθό!");
+                //MessageBox.Show("Πρέπει να καταχωρήσετε την μηνιαίο μισθό!");
                 dgv.Rows[e.RowIndex].Cells["personcostMonthSalary"].Value = 0;
             }
 
             if (dgv.Rows[e.RowIndex].Cells["personcostMonthContributions"].Value == System.DBNull.Value)
             {
-                MessageBox.Show("Πρέπει να καταχωρήσετε τις μηνιαίες εργοδοτικές εισφορές!");
+                //MessageBox.Show("Πρέπει να καταχωρήσετε τις μηνιαίες εργοδοτικές εισφορές!");
                 dgv.Rows[e.RowIndex].Cells["personcostMonthContributions"].Value = 0;
             }
 

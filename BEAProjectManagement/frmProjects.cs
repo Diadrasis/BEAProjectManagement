@@ -154,13 +154,11 @@ namespace BEAProjectManagement
             dgv.Rows[CurrentRow].Cells["dataGridViewTextBoxColumn5"].Value = this.monthCalendar2.SelectionStart;
             this.monthCalendar2.Visible = false;
         }
-               
-
-       
+          
 
         private void tblProjectsDataGridView_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
-
+            /*
             if (dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn4"].Value == System.DBNull.Value)
             {
                 MessageBox.Show("To έργο πρέπει να έχει ημερομηνία έναρξης!");
@@ -199,6 +197,7 @@ namespace BEAProjectManagement
                 MessageBox.Show("To έργο πρέπει να έχει προυπολογισμό ωρών!");
                 dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn6"].Value = 0;
             }
+            */
         }        
     }
 }

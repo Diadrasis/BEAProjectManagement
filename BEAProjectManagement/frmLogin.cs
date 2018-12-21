@@ -19,7 +19,7 @@ namespace BEAProjectManagement
         private void frmLogin_Load(object sender, EventArgs e)
         {
             this.Text = "Είσοδος";
-            this.label4.Text = "v 1.0.0.34";
+            this.label4.Text = "v 1.0.0.38";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -113,7 +113,7 @@ namespace BEAProjectManagement
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Uri myUri = new Uri("mailto:support@diadrasis.gr?Subject=Τεχνικό%20Πρόβλημα%20Εφαρμογής%20ΒΕΑ&body=Περιγραφή");
+            Uri myUri = new Uri("mailto:info@diadrasis.gr?Subject=Τεχνικό%20Πρόβλημα%20Εφαρμογής%20ΒΕΑ&body=Περιγραφή");
             System.Diagnostics.Process.Start(myUri.AbsoluteUri);
         }
     }

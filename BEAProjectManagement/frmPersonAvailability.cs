@@ -40,8 +40,8 @@ namespace BEAProjectManagement
             this.lblPersonel.Text = bea.currentPerson;
             this.lblPersonel.Location = new Point(320, 110);
 
-            dgv.Width = 600;
-            dgv.Height = 200;
+            dgv.Width = 700;
+            dgv.Height = 300;
 
             dgv.Columns["dataGridViewTextBoxColumn1"].Visible = false;
 
@@ -116,6 +116,7 @@ namespace BEAProjectManagement
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
             dgv.Rows[CurrentRow].Cells["dataGridViewTextBoxColumn3"].Value = this.monthCalendar1.SelectionStart;
+            dgv.Rows[CurrentRow].Cells["dataGridViewTextBoxColumn4"].Value = this.monthCalendar1.SelectionStart;
             this.monthCalendar1.Visible = false;
         }
 

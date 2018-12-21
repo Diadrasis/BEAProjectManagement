@@ -48,17 +48,17 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tblPersonAvailabilityBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.tblPersonAvailabilityDataGridView = new System.Windows.Forms.DataGridView();
-            this.vAvailabilityBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.vAvailabilityTableAdapter = new BEAProjectManagement.beaDBDataSetTableAdapters.vAvailabilityTableAdapter();
-            this.lblPersonel = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.vAvailabilityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fromDate = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toDate = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vAvailabilityTableAdapter = new BEAProjectManagement.beaDBDataSetTableAdapters.vAvailabilityTableAdapter();
+            this.lblPersonel = new System.Windows.Forms.Label();
             this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             ((System.ComponentModel.ISupportInitialize)(this.beaDBDataSet)).BeginInit();
@@ -87,6 +87,7 @@
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.tblActivityTeamTableAdapter = null;
+            this.tableAdapterManager.tblActivityWorkByIDTableAdapter = null;
             this.tableAdapterManager.tblActivityWorksTableAdapter = null;
             this.tableAdapterManager.tblAvailabilityTableAdapter = null;
             this.tableAdapterManager.tblDepartmentsTableAdapter = null;
@@ -257,25 +258,6 @@
             this.tblPersonAvailabilityDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblPersonAvailabilityDataGridView_CellContentClick);
             this.tblPersonAvailabilityDataGridView.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblPersonAvailabilityDataGridView_RowValidated);
             // 
-            // vAvailabilityBindingSource
-            // 
-            this.vAvailabilityBindingSource.DataMember = "vAvailability";
-            this.vAvailabilityBindingSource.DataSource = this.beaDBDataSet;
-            // 
-            // vAvailabilityTableAdapter
-            // 
-            this.vAvailabilityTableAdapter.ClearBeforeFill = true;
-            // 
-            // lblPersonel
-            // 
-            this.lblPersonel.AutoSize = true;
-            this.lblPersonel.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblPersonel.Location = new System.Drawing.Point(371, 108);
-            this.lblPersonel.Name = "lblPersonel";
-            this.lblPersonel.Size = new System.Drawing.Size(52, 19);
-            this.lblPersonel.TabIndex = 10;
-            this.lblPersonel.Text = "label2";
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "persavailID";
@@ -299,6 +281,11 @@
             this.dataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewTextBoxColumn6.ValueMember = "availabilityID";
+            // 
+            // vAvailabilityBindingSource
+            // 
+            this.vAvailabilityBindingSource.DataMember = "vAvailability";
+            this.vAvailabilityBindingSource.DataSource = this.beaDBDataSet;
             // 
             // fromDate
             // 
@@ -330,6 +317,20 @@
             this.dataGridViewTextBoxColumn5.HeaderText = "persavailWeekhours";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
+            // vAvailabilityTableAdapter
+            // 
+            this.vAvailabilityTableAdapter.ClearBeforeFill = true;
+            // 
+            // lblPersonel
+            // 
+            this.lblPersonel.AutoSize = true;
+            this.lblPersonel.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.lblPersonel.Location = new System.Drawing.Point(371, 108);
+            this.lblPersonel.Name = "lblPersonel";
+            this.lblPersonel.Size = new System.Drawing.Size(52, 19);
+            this.lblPersonel.TabIndex = 10;
+            this.lblPersonel.Text = "label2";
+            // 
             // monthCalendar2
             // 
             this.monthCalendar2.Location = new System.Drawing.Point(404, 128);
@@ -349,7 +350,7 @@
             // frmPersonAvailability
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(772, 418);
+            this.ClientSize = new System.Drawing.Size(784, 511);
             this.Controls.Add(this.monthCalendar2);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.lblPersonel);

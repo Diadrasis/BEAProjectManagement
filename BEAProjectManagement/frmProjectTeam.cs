@@ -64,11 +64,10 @@ namespace BEAProjectManagement
             dgv.Columns["dataGridViewTextBoxColumn2"].Visible = false;
 
             dgv.Columns["dataGridViewTextBoxColumn3"].HeaderText = "Εργαζόμενος";
-            dgv.Columns["dataGridViewTextBoxColumn3"].Width = 270;
+            dgv.Columns["dataGridViewTextBoxColumn3"].Width = 250;
 
             dgv.Columns["prteamRole"].HeaderText = "Ρόλος";
-            dgv.Columns["prteamRole"].Width = 270;
-                    
+            dgv.Columns["prteamRole"].Width = 150;
 
             dgv.Columns["dataGridViewTextBoxColumn4"].HeaderText = "Απασχόληση - ΑΗ";
             dgv.Columns["dataGridViewTextBoxColumn4"].Width = 140;

@@ -49,8 +49,8 @@
             this.tblPersonsBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.tblPersonsDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Availability = new System.Windows.Forms.DataGridViewImageColumn();
             this.Cost = new System.Windows.Forms.DataGridViewImageColumn();
@@ -81,6 +81,7 @@
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.tblActivityTeamTableAdapter = null;
+            this.tableAdapterManager.tblActivityWorkByIDTableAdapter = null;
             this.tableAdapterManager.tblActivityWorksTableAdapter = null;
             this.tableAdapterManager.tblAvailabilityTableAdapter = null;
             this.tableAdapterManager.tblDepartmentsTableAdapter = null;
@@ -231,8 +232,8 @@
             this.tblPersonsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tblPersonsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn4,
             this.Availability,
             this.Cost,
@@ -257,17 +258,17 @@
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "personFirstName";
-            this.dataGridViewTextBoxColumn2.HeaderText = "personFirstName";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "personSurname";
             this.dataGridViewTextBoxColumn3.HeaderText = "personSurname";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "personFirstName";
+            this.dataGridViewTextBoxColumn2.HeaderText = "personFirstName";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -341,8 +342,8 @@
         private System.Windows.Forms.ToolStripButton tblPersonsBindingNavigatorSaveItem;
         private System.Windows.Forms.DataGridView tblPersonsDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewImageColumn Availability;
         private System.Windows.Forms.DataGridViewImageColumn Cost;
