@@ -94,7 +94,12 @@ namespace BEAProjectManagement
                 if (e.ColumnIndex == dgv.Columns["fromDate"].Index && this.monthCalendar1.Visible == false)
                 {
                     this.monthCalendar1.Visible = true;
-                    this.monthCalendar1.Location = new Point(MousePosition.X - this.Location.X, MousePosition.Y - this.Location.Y);
+                    if (CurrentRow > 7)
+                    {
+                        this.monthCalendar1.Location = new Point(MousePosition.X - this.Location.X, MousePosition.Y - this.Location.Y-210);
+                    } else {
+                        this.monthCalendar1.Location = new Point(MousePosition.X - this.Location.X, MousePosition.Y - this.Location.Y);
+                    }
                     if (dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn3"].Value != System.DBNull.Value)
                     {
                         this.monthCalendar1.SetDate(Convert.ToDateTime(dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn3"].Value));
@@ -104,7 +109,15 @@ namespace BEAProjectManagement
                 if (e.ColumnIndex == dgv.Columns["toDate"].Index && this.monthCalendar2.Visible == false)
                 {
                     this.monthCalendar2.Visible = true;
-                    this.monthCalendar2.Location = new Point(MousePosition.X - this.Location.X, MousePosition.Y - this.Location.Y);
+                    if (CurrentRow > 7)
+                    {
+                        this.monthCalendar2.Location = new Point(MousePosition.X - this.Location.X, MousePosition.Y - this.Location.Y-210);
+
+                    }
+                    else
+                    {
+                        this.monthCalendar2.Location = new Point(MousePosition.X - this.Location.X, MousePosition.Y - this.Location.Y);
+                    }
                     if (dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn4"].Value != System.DBNull.Value)
                     {
                         this.monthCalendar2.SetDate(Convert.ToDateTime(dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn4"].Value));
