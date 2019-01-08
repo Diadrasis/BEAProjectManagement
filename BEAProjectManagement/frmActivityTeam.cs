@@ -91,10 +91,11 @@ namespace BEAProjectManagement
             dgv.Columns["dataGridViewTextBoxColumn2"].Width = 220;
 
             dgv.Columns["dataGridViewTextBoxColumn3"].HeaderText = "Απασχόληση - ΑΗ";
-            dgv.Columns["dataGridViewTextBoxColumn3"].Width = 120;
+            dgv.Columns["dataGridViewTextBoxColumn3"].Width = 130;
 
             dgv.Columns["actteamBudget"].HeaderText = "Κόστος";
             dgv.Columns["actteamBudget"].Width = 90;
+            dgv.Columns["actteamBudget"].Visible = false;
 
             dgv.Columns["availabilityIcon"].HeaderText = "";
             dgv.Columns["availabilityIcon"].Width = 70;

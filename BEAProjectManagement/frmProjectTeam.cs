@@ -44,12 +44,14 @@ namespace BEAProjectManagement
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
 
+            this.Size = new Size(950,600);
+
             dgv = this.tblProjectTeamDataGridView;
             bnv = this.tblProjectTeamBindingNavigator;
             DesignHelper.DesignDataGridView(dgv);
             DesignHelper.DesignDataGridNavigator(bnv);
 
-            this.Text = "Ομάδα Έργου";
+            this.Text = "Ομάδα Έργου";           
 
             this.lblCurrentProject.Text = bea.currentProject;
             this.lblCurrentProject.Location = new Point(310, 110);

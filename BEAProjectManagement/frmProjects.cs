@@ -22,15 +22,16 @@ namespace BEAProjectManagement
 
         private void tblProjectsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.tblProjectsBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.beaDBDataSet);
-
+            UpdateData();
         }
 
         private void frmProjects_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'beaDBDataSet.tblProjects' table. You can move, or remove it, as needed.
+            ReloadData();
+        }
+
+        private void ReloadData()
+        {
             this.tblProjectsTableAdapter.Fill(this.beaDBDataSet.tblProjects);
 
             dgv = this.tblProjectsDataGridView;
@@ -74,7 +75,7 @@ namespace BEAProjectManagement
             dgv.Columns["projFinish"].HeaderText = "";
             dgv.Columns["projFinish"].Width = 50;
 
-            
+
 
             dgv.Columns["projTotalBudget"].HeaderText = "Συνολικός ΠΥ";
             dgv.Columns["projTotalBudget"].Width = 110;
@@ -82,7 +83,7 @@ namespace BEAProjectManagement
 
             dgv.Columns["projBudget"].HeaderText = "ΠΥ Προσωπικού";
             dgv.Columns["projBudget"].Width = 130;
-            
+
             dgv.Columns["dataGridViewTextBoxColumn6"].HeaderText = "Απασχόληση";
             dgv.Columns["dataGridViewTextBoxColumn6"].Width = 130;
             dgv.Columns["dataGridViewTextBoxColumn6"].Visible = false;
@@ -122,6 +123,7 @@ namespace BEAProjectManagement
 
                 if (e.ColumnIndex == dgv.Columns["projActivities"].Index)
                 {
+                    UpdateData();
                     frmProjectActivities frm = new frmProjectActivities();                    
                     frm.projectID =Convert.ToInt16(dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value);
                     frm.projStart = Convert.ToDateTime(dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn4"].Value);
@@ -132,6 +134,7 @@ namespace BEAProjectManagement
 
                 if (e.ColumnIndex == dgv.Columns["projTeam"].Index)
                 {
+                    UpdateData();
                     frmProjectTeam frm = new frmProjectTeam();
                     frm.projectID = Convert.ToInt16(dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value);
                     bea.currentProject = bea.GetCurrentProject(frm.projectID);                    
@@ -139,9 +142,7 @@ namespace BEAProjectManagement
                 }
             }           
         }
-
-
-        
+               
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
@@ -198,6 +199,26 @@ namespace BEAProjectManagement
                 dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn6"].Value = 0;
             }
             */
+        }        
+
+        private void  UpdateData()
+        {            
+
+            try
+            {
+                this.Validate();
+                this.tblProjectsBindingSource.EndEdit();
+                this.tableAdapterManager.UpdateAll(this.beaDBDataSet);
+            }
+            catch (Exception ex)
+            {
+                if (((string)ex.Message).Contains("The DELETE statement conflicted")){
+                    //MessageBox.Show(ex.Message);
+                    MessageBox.Show("Δεν μπορείτε να διαγράψετε ένα έργο που έχει προσωπικό ή δραστηριότητες!");
+                    ReloadData();
+                }
+            }           
+            
         }        
     }
 }

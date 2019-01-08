@@ -88,6 +88,7 @@
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.tblActivityTeamTableAdapter = this.tblActivityTeamTableAdapter;
+            this.tableAdapterManager.tblActivityWorkByIDTableAdapter = null;
             this.tableAdapterManager.tblActivityWorksTableAdapter = null;
             this.tableAdapterManager.tblAvailabilityTableAdapter = null;
             this.tableAdapterManager.tblDepartmentsTableAdapter = null;
@@ -308,7 +309,7 @@
             // lblBudget
             // 
             this.lblBudget.AutoSize = true;
-            this.lblBudget.Location = new System.Drawing.Point(780, 101);
+            this.lblBudget.Location = new System.Drawing.Point(830, 101);
             this.lblBudget.Name = "lblBudget";
             this.lblBudget.Size = new System.Drawing.Size(35, 13);
             this.lblBudget.TabIndex = 6;
@@ -317,7 +318,7 @@
             // lblRemainingBudget
             // 
             this.lblRemainingBudget.AutoSize = true;
-            this.lblRemainingBudget.Location = new System.Drawing.Point(780, 126);
+            this.lblRemainingBudget.Location = new System.Drawing.Point(831, 126);
             this.lblRemainingBudget.Name = "lblRemainingBudget";
             this.lblRemainingBudget.Size = new System.Drawing.Size(35, 13);
             this.lblRemainingBudget.TabIndex = 7;
@@ -354,7 +355,7 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "label3";
             // 
-            // frmActivityTeam2
+            // frmActivityTeam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1008, 573);
@@ -365,7 +366,7 @@
             this.Controls.Add(this.lblBudget);
             this.Controls.Add(this.tblActivityTeamDataGridView);
             this.Controls.Add(this.tblActivityTeamBindingNavigator);
-            this.Name = "frmActivityTeam2";
+            this.Name = "frmActivityTeam";
             this.Load += new System.EventHandler(this.frmActivityTeam2_Load);
             this.Controls.SetChildIndex(this.tblActivityTeamBindingNavigator, 0);
             this.Controls.SetChildIndex(this.tblActivityTeamDataGridView, 0);

@@ -48,7 +48,15 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tblProjectTeamBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.tblProjectTeamDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.vPersonsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prteamRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prteamBudget = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.availabilityIcon = new System.Windows.Forms.DataGridViewImageColumn();
+            this.availability = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.lblBudget = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -57,14 +65,6 @@
             this.tblProjectTeamTableAdapter = new BEAProjectManagement.beaDBDataSetTableAdapters.tblProjectTeamTableAdapter();
             this.tableAdapterManager = new BEAProjectManagement.beaDBDataSetTableAdapters.TableAdapterManager();
             this.vPersonsTableAdapter = new BEAProjectManagement.beaDBDataSetTableAdapters.vPersonsTableAdapter();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prteamRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prteamBudget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.availabilityIcon = new System.Windows.Forms.DataGridViewImageColumn();
-            this.availability = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tblProjectTeamBindingNavigator)).BeginInit();
             this.tblProjectTeamBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tblProjectTeamBindingSource)).BeginInit();
@@ -99,7 +99,7 @@
             this.tblProjectTeamBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.tblProjectTeamBindingNavigator.Name = "tblProjectTeamBindingNavigator";
             this.tblProjectTeamBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.tblProjectTeamBindingNavigator.Size = new System.Drawing.Size(908, 25);
+            this.tblProjectTeamBindingNavigator.Size = new System.Drawing.Size(1444, 25);
             this.tblProjectTeamBindingNavigator.TabIndex = 1;
             this.tblProjectTeamBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -239,17 +239,74 @@
             this.tblProjectTeamDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblProjectTeamDataGridView_CellContentClick);
             this.tblProjectTeamDataGridView.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblProjectTeamDataGridView_RowValidated);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "prteamID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "prteamID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "projID";
+            this.dataGridViewTextBoxColumn2.HeaderText = "projID";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "personID";
+            this.dataGridViewTextBoxColumn3.DataSource = this.vPersonsBindingSource;
+            this.dataGridViewTextBoxColumn3.DisplayMember = "personName";
+            this.dataGridViewTextBoxColumn3.HeaderText = "personID";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewTextBoxColumn3.ValueMember = "personID";
+            // 
             // vPersonsBindingSource
             // 
             this.vPersonsBindingSource.DataMember = "vPersons";
             this.vPersonsBindingSource.DataSource = this.beaDBDataSet;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "prteamWorkBudget1";
+            this.dataGridViewTextBoxColumn4.HeaderText = "prteamWorkBudget";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // prteamRole
+            // 
+            this.prteamRole.DataPropertyName = "prteamRole";
+            this.prteamRole.HeaderText = "prteamRole";
+            this.prteamRole.Name = "prteamRole";
+            // 
+            // prteamBudget
+            // 
+            this.prteamBudget.DataPropertyName = "prteamBudget";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.prteamBudget.DefaultCellStyle = dataGridViewCellStyle1;
+            this.prteamBudget.HeaderText = "prteamBudget";
+            this.prteamBudget.Name = "prteamBudget";
+            // 
+            // availabilityIcon
+            // 
+            this.availabilityIcon.HeaderText = "availabilityIcon";
+            this.availabilityIcon.Image = global::BEAProjectManagement.Properties.Resources.availability;
+            this.availabilityIcon.Name = "availabilityIcon";
+            // 
+            // availability
+            // 
+            this.availability.HeaderText = "availability";
+            this.availability.Name = "availability";
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label2.Location = new System.Drawing.Point(654, 96);
+            this.label2.Location = new System.Drawing.Point(1190, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 17);
             this.label2.TabIndex = 4;
@@ -260,7 +317,7 @@
             this.lblBudget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBudget.AutoSize = true;
             this.lblBudget.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblBudget.Location = new System.Drawing.Point(777, 96);
+            this.lblBudget.Location = new System.Drawing.Point(1313, 96);
             this.lblBudget.Name = "lblBudget";
             this.lblBudget.Size = new System.Drawing.Size(47, 17);
             this.lblBudget.TabIndex = 5;
@@ -272,7 +329,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label4.Location = new System.Drawing.Point(655, 119);
+            this.label4.Location = new System.Drawing.Point(1191, 119);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 17);
             this.label4.TabIndex = 6;
@@ -283,7 +340,7 @@
             this.lblRemainingBudget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRemainingBudget.AutoSize = true;
             this.lblRemainingBudget.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblRemainingBudget.Location = new System.Drawing.Point(777, 119);
+            this.lblRemainingBudget.Location = new System.Drawing.Point(1313, 119);
             this.lblRemainingBudget.Name = "lblRemainingBudget";
             this.lblRemainingBudget.Size = new System.Drawing.Size(47, 17);
             this.lblRemainingBudget.TabIndex = 7;
@@ -333,67 +390,10 @@
             // 
             this.vPersonsTableAdapter.ClearBeforeFill = true;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "prteamID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "prteamID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "projID";
-            this.dataGridViewTextBoxColumn2.HeaderText = "projID";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "personID";
-            this.dataGridViewTextBoxColumn3.DataSource = this.vPersonsBindingSource;
-            this.dataGridViewTextBoxColumn3.DisplayMember = "personName";
-            this.dataGridViewTextBoxColumn3.HeaderText = "personID";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewTextBoxColumn3.ValueMember = "personID";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "prteamWorkBudget1";
-            this.dataGridViewTextBoxColumn4.HeaderText = "prteamWorkBudget";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // prteamRole
-            // 
-            this.prteamRole.DataPropertyName = "prteamRole";
-            this.prteamRole.HeaderText = "prteamRole";
-            this.prteamRole.Name = "prteamRole";
-            // 
-            // prteamBudget
-            // 
-            this.prteamBudget.DataPropertyName = "prteamBudget";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.prteamBudget.DefaultCellStyle = dataGridViewCellStyle1;
-            this.prteamBudget.HeaderText = "prteamBudget";
-            this.prteamBudget.Name = "prteamBudget";
-            // 
-            // availabilityIcon
-            // 
-            this.availabilityIcon.HeaderText = "availabilityIcon";
-            this.availabilityIcon.Image = global::BEAProjectManagement.Properties.Resources.availability;
-            this.availabilityIcon.Name = "availabilityIcon";
-            // 
-            // availability
-            // 
-            this.availability.HeaderText = "availability";
-            this.availability.Name = "availability";
-            // 
             // frmProjectTeam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(908, 424);
+            this.ClientSize = new System.Drawing.Size(1444, 501);
             this.Controls.Add(this.lblCurrentProject);
             this.Controls.Add(this.lblRemainingBudget);
             this.Controls.Add(this.label4);
