@@ -32,7 +32,7 @@
     <SuiteName>ΒΕΑ</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>42</ApplicationRevision>
+    <ApplicationRevision>45</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -105,6 +105,12 @@
     </Compile>
     <Compile Include="frmActivityTeam.Designer.cs">
       <DependentUpon>frmActivityTeam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmActivityTeam2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmActivityTeam2.Designer.cs">
+      <DependentUpon>frmActivityTeam2.cs</DependentUpon>
     </Compile>
     <Compile Include="frmActivityWorkDetails.cs">
       <SubType>Form</SubType>
@@ -308,6 +314,9 @@
     </Compile>
     <EmbeddedResource Include="frmActivityTeam.resx">
       <DependentUpon>frmActivityTeam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmActivityTeam2.resx">
+      <DependentUpon>frmActivityTeam2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmActivityWorkDetails.resx">
       <DependentUpon>frmActivityWorkDetails.cs</DependentUpon>

@@ -25,25 +25,20 @@ namespace BEAProjectManagement
         {
             this.Validate();
             this.tblActivityTeamBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.beaDBDataSet);
+            try
+            {
+                this.tableAdapterManager.UpdateAll(this.beaDBDataSet);
+
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }            
 
             this.lblBudget.Text = GetActivityWorkBudget(practID).Item1.ToString();
             this.lblRemainingBudget.Text = GetActivityWorkBudget(practID).Item2.ToString();
 
-        }
-
-        private void fillToolStripButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.tblActivityTeamTableAdapter.Fill(this.beaDBDataSet.tblActivityTeam, this.practID);
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-
-        }
+        }       
 
         private void frmActivityTeam2_Load(object sender, EventArgs e)
         {
@@ -204,9 +199,19 @@ namespace BEAProjectManagement
 
         private void tblActivityTeamDataGridView_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
+            if (dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value == System.DBNull.Value)
+            {
+                dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value = this.projID;
+            }
+
             if (dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn4"].Value == System.DBNull.Value)
             {
                 dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn4"].Value = this.practID;
+            }
+
+            if (dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn3"].Value == System.DBNull.Value)
+            {
+                dgv.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn3"].Value = 0;
             }
         }
 

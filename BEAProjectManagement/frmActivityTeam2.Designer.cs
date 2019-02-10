@@ -1,6 +1,6 @@
 ﻿namespace BEAProjectManagement
 {
-    partial class frmActivityTeam
+    partial class frmActivityTeam2
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmActivityTeam));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmActivityTeam2));
             this.beaDBDataSet = new BEAProjectManagement.beaDBDataSet();
             this.tblActivityTeamBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tblActivityTeamTableAdapter = new BEAProjectManagement.beaDBDataSetTableAdapters.tblActivityTeamTableAdapter();
@@ -47,27 +47,22 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tblActivityTeamBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
+            this.fillToolStrip = new System.Windows.Forms.ToolStrip();
+            this.practIDToolStripLabel = new System.Windows.Forms.ToolStripLabel();
+            this.practIDToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.fillToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.tblActivityTeamDataGridView = new System.Windows.Forms.DataGridView();
-            this.vProjectTeamBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.lblBudget = new System.Windows.Forms.Label();
-            this.lblRemainingBudget = new System.Windows.Forms.Label();
-            this.vProjectTeamTableAdapter = new BEAProjectManagement.beaDBDataSetTableAdapters.vProjectTeamTableAdapter();
-            this.lblCurrentActivity = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actteamBudget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.availabilityIcon = new System.Windows.Forms.DataGridViewImageColumn();
-            this.availability = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.beaDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblActivityTeamBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblActivityTeamBindingNavigator)).BeginInit();
             this.tblActivityTeamBindingNavigator.SuspendLayout();
+            this.fillToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tblActivityTeamDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vProjectTeamBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // beaDBDataSet
@@ -233,6 +228,37 @@
             this.tblActivityTeamBindingNavigatorSaveItem.Text = "Save Data";
             this.tblActivityTeamBindingNavigatorSaveItem.Click += new System.EventHandler(this.tblActivityTeamBindingNavigatorSaveItem_Click);
             // 
+            // fillToolStrip
+            // 
+            this.fillToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.practIDToolStripLabel,
+            this.practIDToolStripTextBox,
+            this.fillToolStripButton});
+            this.fillToolStrip.Location = new System.Drawing.Point(0, 115);
+            this.fillToolStrip.Name = "fillToolStrip";
+            this.fillToolStrip.Size = new System.Drawing.Size(1008, 25);
+            this.fillToolStrip.TabIndex = 4;
+            this.fillToolStrip.Text = "fillToolStrip";
+            // 
+            // practIDToolStripLabel
+            // 
+            this.practIDToolStripLabel.Name = "practIDToolStripLabel";
+            this.practIDToolStripLabel.Size = new System.Drawing.Size(48, 22);
+            this.practIDToolStripLabel.Text = "practID:";
+            // 
+            // practIDToolStripTextBox
+            // 
+            this.practIDToolStripTextBox.Name = "practIDToolStripTextBox";
+            this.practIDToolStripTextBox.Size = new System.Drawing.Size(100, 25);
+            // 
+            // fillToolStripButton
+            // 
+            this.fillToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.fillToolStripButton.Name = "fillToolStripButton";
+            this.fillToolStripButton.Size = new System.Drawing.Size(26, 22);
+            this.fillToolStripButton.Text = "Fill";
+            this.fillToolStripButton.Click += new System.EventHandler(this.fillToolStripButton_Click);
+            // 
             // tblActivityTeamDataGridView
             // 
             this.tblActivityTeamDataGridView.AutoGenerateColumns = false;
@@ -242,70 +268,12 @@
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
-            this.actteamBudget,
-            this.availabilityIcon,
-            this.availability});
+            this.dataGridViewTextBoxColumn5});
             this.tblActivityTeamDataGridView.DataSource = this.tblActivityTeamBindingSource;
-            this.tblActivityTeamDataGridView.Location = new System.Drawing.Point(120, 180);
+            this.tblActivityTeamDataGridView.Location = new System.Drawing.Point(30, 194);
             this.tblActivityTeamDataGridView.Name = "tblActivityTeamDataGridView";
-            this.tblActivityTeamDataGridView.Size = new System.Drawing.Size(599, 220);
+            this.tblActivityTeamDataGridView.Size = new System.Drawing.Size(691, 220);
             this.tblActivityTeamDataGridView.TabIndex = 5;
-            this.tblActivityTeamDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblActivityTeamDataGridView_CellContentClick);
-            this.tblActivityTeamDataGridView.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblActivityTeamDataGridView_RowValidated);
-            // 
-            // vProjectTeamBindingSource
-            // 
-            this.vProjectTeamBindingSource.DataMember = "vProjectTeam";
-            this.vProjectTeamBindingSource.DataSource = this.beaDBDataSet;
-            // 
-            // lblBudget
-            // 
-            this.lblBudget.AutoSize = true;
-            this.lblBudget.Location = new System.Drawing.Point(830, 101);
-            this.lblBudget.Name = "lblBudget";
-            this.lblBudget.Size = new System.Drawing.Size(35, 13);
-            this.lblBudget.TabIndex = 6;
-            this.lblBudget.Text = "label2";
-            // 
-            // lblRemainingBudget
-            // 
-            this.lblRemainingBudget.AutoSize = true;
-            this.lblRemainingBudget.Location = new System.Drawing.Point(831, 126);
-            this.lblRemainingBudget.Name = "lblRemainingBudget";
-            this.lblRemainingBudget.Size = new System.Drawing.Size(35, 13);
-            this.lblRemainingBudget.TabIndex = 7;
-            this.lblRemainingBudget.Text = "label2";
-            // 
-            // vProjectTeamTableAdapter
-            // 
-            this.vProjectTeamTableAdapter.ClearBeforeFill = true;
-            // 
-            // lblCurrentActivity
-            // 
-            this.lblCurrentActivity.AutoSize = true;
-            this.lblCurrentActivity.Location = new System.Drawing.Point(474, 101);
-            this.lblCurrentActivity.Name = "lblCurrentActivity";
-            this.lblCurrentActivity.Size = new System.Drawing.Size(35, 13);
-            this.lblCurrentActivity.TabIndex = 8;
-            this.lblCurrentActivity.Text = "label2";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(702, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "label2";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(702, 126);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "label3";
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -317,13 +285,8 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "personID";
-            this.dataGridViewTextBoxColumn2.DataSource = this.vProjectTeamBindingSource;
-            this.dataGridViewTextBoxColumn2.DisplayMember = "personName";
             this.dataGridViewTextBoxColumn2.HeaderText = "personID";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewTextBoxColumn2.ValueMember = "personID";
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -337,51 +300,32 @@
             this.dataGridViewTextBoxColumn4.HeaderText = "practID";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
-            // actteamBudget
+            // dataGridViewTextBoxColumn5
             // 
-            this.actteamBudget.HeaderText = "actteamBudget";
-            this.actteamBudget.Name = "actteamBudget";
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "actteamBudget";
+            this.dataGridViewTextBoxColumn5.HeaderText = "actteamBudget";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
-            // availabilityIcon
-            // 
-            this.availabilityIcon.HeaderText = "availabilityIcon";
-            this.availabilityIcon.Image = global::BEAProjectManagement.Properties.Resources.availability;
-            this.availabilityIcon.Name = "availabilityIcon";
-            this.availabilityIcon.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.availabilityIcon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // availability
-            // 
-            this.availability.HeaderText = "availability";
-            this.availability.Name = "availability";
-            // 
-            // frmActivityTeam
+            // frmActivityTeam2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1008, 573);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.lblCurrentActivity);
-            this.Controls.Add(this.lblRemainingBudget);
-            this.Controls.Add(this.lblBudget);
             this.Controls.Add(this.tblActivityTeamDataGridView);
+            this.Controls.Add(this.fillToolStrip);
             this.Controls.Add(this.tblActivityTeamBindingNavigator);
-            this.Name = "frmActivityTeam";
+            this.Name = "frmActivityTeam2";
             this.Load += new System.EventHandler(this.frmActivityTeam2_Load);
             this.Controls.SetChildIndex(this.tblActivityTeamBindingNavigator, 0);
+            this.Controls.SetChildIndex(this.fillToolStrip, 0);
             this.Controls.SetChildIndex(this.tblActivityTeamDataGridView, 0);
-            this.Controls.SetChildIndex(this.lblBudget, 0);
-            this.Controls.SetChildIndex(this.lblRemainingBudget, 0);
-            this.Controls.SetChildIndex(this.lblCurrentActivity, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
             ((System.ComponentModel.ISupportInitialize)(this.beaDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblActivityTeamBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblActivityTeamBindingNavigator)).EndInit();
             this.tblActivityTeamBindingNavigator.ResumeLayout(false);
             this.tblActivityTeamBindingNavigator.PerformLayout();
+            this.fillToolStrip.ResumeLayout(false);
+            this.fillToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tblActivityTeamDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vProjectTeamBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -406,20 +350,15 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton tblActivityTeamBindingNavigatorSaveItem;
+        private System.Windows.Forms.ToolStrip fillToolStrip;
+        private System.Windows.Forms.ToolStripLabel practIDToolStripLabel;
+        private System.Windows.Forms.ToolStripTextBox practIDToolStripTextBox;
+        private System.Windows.Forms.ToolStripButton fillToolStripButton;
         private System.Windows.Forms.DataGridView tblActivityTeamDataGridView;
-        private System.Windows.Forms.Label lblBudget;
-        private System.Windows.Forms.Label lblRemainingBudget;
-        private System.Windows.Forms.BindingSource vProjectTeamBindingSource;
-        private beaDBDataSetTableAdapters.vProjectTeamTableAdapter vProjectTeamTableAdapter;
-        private System.Windows.Forms.Label lblCurrentActivity;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn actteamBudget;
-        private System.Windows.Forms.DataGridViewImageColumn availabilityIcon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn availability;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }
