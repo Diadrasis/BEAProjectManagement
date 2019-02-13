@@ -38,10 +38,8 @@ namespace BEAProjectManagement
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
-
             selectedDate = this.monthCalendar1.SelectionStart;
-            SelectCalendarDate(selectedDate);
-           
+            SelectCalendarDate(selectedDate);           
         }
 
         private void SelectCalendarDate(DateTime dt)
