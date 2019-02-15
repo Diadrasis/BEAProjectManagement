@@ -35,7 +35,7 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(18, 122);
+            this.monthCalendar1.Location = new System.Drawing.Point(18, 158);
             this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 3;
@@ -43,9 +43,8 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = global::BEAProjectManagement.Properties.Resources.ok;
-            this.button1.Location = new System.Drawing.Point(19, 285);
+            this.button1.Location = new System.Drawing.Point(18, 106);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(49, 43);
             this.button1.TabIndex = 4;
@@ -56,7 +55,7 @@
             // 
             this.lblCurrentPerson.AutoSize = true;
             this.lblCurrentPerson.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lblCurrentPerson.Location = new System.Drawing.Point(26, 98);
+            this.lblCurrentPerson.Location = new System.Drawing.Point(83, 129);
             this.lblCurrentPerson.Name = "lblCurrentPerson";
             this.lblCurrentPerson.Size = new System.Drawing.Size(53, 20);
             this.lblCurrentPerson.TabIndex = 7;

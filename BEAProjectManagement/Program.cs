@@ -18,6 +18,7 @@ namespace BEAProjectManagement
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmSplash());
             //Application.Run(new frmProjects());
+            //Application.Run(new frmPersons());
         }
     }
 }

@@ -20,12 +20,49 @@ namespace BEAProjectManagement
         private SqlConnection con;
         private SqlCommand com;
         public DateTime selectedDate;
+        private Boolean flag=true;
+        private int n, m;
+        private int i, j;
+        Point startLocation;
 
         public frmTimeSheet2()
         {
             InitializeComponent();
         }
+        public class ComboboxItem
+        {
+            public ComboboxItem(string t, string v)
+            {
+                Text = t;
+                Value = v;
+            }
+            public string Text { get; set; }
+            public object Value { get; set; }
 
+            public override string ToString()
+            {
+                return Text;
+            }
+
+            public override bool Equals(object obj)
+            {
+                ComboboxItem item = obj as ComboboxItem;
+                if (item == null)
+                {
+                    return false;
+                }
+                return item.Value == this.Value;
+            }
+
+            public override int GetHashCode()
+            {
+                if (this.Value == null)
+                {
+                    return 0;
+                }
+                return this.Value.GetHashCode();
+            }
+        }
         private void frmTimeSheet2_Load(object sender, EventArgs e)
         {
             this.Text = "Καταγραφή Ωρών";
@@ -35,15 +72,14 @@ namespace BEAProjectManagement
             this.Font = new Font("Century Gothic", 10);
             this.monthCalendar1.MaxSelectionCount = 7;           
         }
-
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
             selectedDate = this.monthCalendar1.SelectionStart;
             SelectCalendarDate(selectedDate);           
         }
-
         private void SelectCalendarDate(DateTime dt)
         {
+            //select previous and following days
             CultureInfo greek = new CultureInfo("el-GR");            
             if ((int)dt.DayOfWeek != 0)
             {
@@ -54,14 +90,20 @@ namespace BEAProjectManagement
                 dateFrom = dt.AddDays(-6);
             }
             this.monthCalendar1.SelectionStart = dateFrom ;
-            this.monthCalendar1.SelectionEnd = dateFrom.AddDays(6);
-            
+            this.monthCalendar1.SelectionEnd = dateFrom.AddDays(6);            
             GetProjects(dateFrom);
+            DesignLabels();
+            DesignActivitiesComboBoxes();
+            DesignWorksComboBoxes();
+            CheckAvailability();
+            PopulateWorkComboBoxes();
+            PopulateActivityComboBoxes();
+            GetWeekWorkedHours();
             this.button1.Enabled = true;
         }
-
         private void GetProjects(DateTime dt)
         {
+            //get persons projects
             projects = new List<string>();
             projectIDs = new List<int>();
 
@@ -113,33 +155,33 @@ namespace BEAProjectManagement
                 con.Close();
 
             }
+            con.Close(); 
            
+        }
+        private void DesignLabels()
+        {
             if (projects.Count > 0)
             {
+                //Design the various controls
                 DesignGrid(dateFrom, projects);
-                GetWeekWorkedHours();
+                //Populate with existing data                
             }
             else
             {
                 MessageBox.Show("Δεν υπάρχουν την επιλεγμένη περίοδο έργα για τον εργαζόμενο!");
                 //con.Close();
             }
-            con.Close();
-
         }
-
-        private void DesignGrid(DateTime dt, List<string> projects)
-        {
-            Point startLocation = new Point(200, 200); // This take the location in form . We have added a label with no text just to take the location and under it to add fields.
+        private void DesignGrid(DateTime dt, List<string> projects)        {
+            startLocation = new Point(200, 200); // This take the location in form . We have added a label with no text just to take the location and under it to add fields.
             int a = startLocation.X + 80;//The coordinate X of the label we give to the int variable a
             int b = startLocation.Y;//The coordinate Y
 
-            int n = 7;// Take the value N -Rows
-            int m = projects.Count; // Take the value M-Columns
-
-            int i, j;
+            n = 7;// Take the value N -Rows
+            m = projects.Count; // Take the value M-Columns                        
             int[,] matrix = new int[n, m];
 
+            #region  Project Labels
             //create project labels
             for (j = 0; j < m; j++)
             {
@@ -161,9 +203,13 @@ namespace BEAProjectManagement
                     label.Text = projects[j];
                 }
             }
-
+            #endregion
+            
+            #region Create Controls
+            //create controls for each day
             for (i = 0; i < n; i++)
             {
+                #region DateLabels
                 //create date labels
                 //clear previous Label lbl=new Label();
                 if (this.Controls.Find("Date" + i.ToString(), false).Length > 0)
@@ -182,12 +228,12 @@ namespace BEAProjectManagement
                     this.Controls.Add(label);
                     label.Text = dateFrom.AddDays(i).ToString("dddd") + " " + dateFrom.AddDays(i).ToString("dd/MM/yy");
                 }
-
-               
-
+                #endregion
+                               
                 for (j = 0; j < m; j++)
                 {
 
+                    #region HourTextControls
                     if (this.Controls.Find("txt" + i.ToString()+j.ToString(), false).Length > 0)
                     {
                         TextBox tb = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
@@ -210,7 +256,39 @@ namespace BEAProjectManagement
                         this.Controls.Add(textbox);
 
                     }
-
+                    #endregion  
+                }
+            }
+            #endregion 
+        }        
+        private void ComboActivity_SelectedIndexChanged(object sender,  System.EventArgs e)
+        {
+            if (flag == true)
+            {
+                ComboBox comboBox = (ComboBox)sender;
+                int i = int.Parse(comboBox.Name.Substring(3, 1));
+                int j = int.Parse(comboBox.Name.Substring(4, 1));               
+                if (comboBox.SelectedIndex != 0)
+                {                    
+                    ComboboxItem cbi = (ComboboxItem)comboBox.SelectedItem;
+                    int activityID = int.Parse(cbi.Value.ToString());
+                    con.Close();
+                    ChangeWorkComboBoxesValues(i, j, activityID);
+                }
+                else
+                {                   
+                    ResetWorkComboBoxValue(i, j);
+                }
+            }
+            
+        }       
+        private void DesignActivitiesComboBoxes()
+        {
+            #region Activity Combo Boxes
+            for (i = 0; i < n; i++)
+            {
+                for (j = 0; j < m; j++)
+                {
                     if (this.Controls.Find("cmb" + i.ToString() + j.ToString(), false).Length > 0)
                     {
                         ComboBox cb = (ComboBox)this.Controls.Find("cmb" + i.ToString() + j.ToString(), false)[0];
@@ -224,10 +302,20 @@ namespace BEAProjectManagement
                         combobox.Width = 95;
                         combobox.Height = 25;
                         combobox.Location = new Point(startLocation.X + 250 + j * 250, startLocation.Y + i * 30);//Now the field take the location where it will be pasted.
-                        this.Controls.Add(combobox);                       
-
+                        this.Controls.Add(combobox);
+                        combobox.SelectedIndexChanged += new System.EventHandler(ComboActivity_SelectedIndexChanged);
                     }
-
+                }
+            }
+            #endregion
+        }
+        private void DesignWorksComboBoxes()
+        {
+            #region Works Combo Boxes
+            for (i = 0; i < n; i++)
+            {
+                for (j = 0; j < m; j++)
+                {
                     //check works comboboxes
                     if (this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false).Length > 0)
                     {
@@ -242,11 +330,19 @@ namespace BEAProjectManagement
                         combobox.Width = 95;
                         combobox.Height = 25;
                         combobox.Location = new Point(startLocation.X + 250 + 100 + j * 250, startLocation.Y + i * 30);//Now the field take the location where it will be pasted.
-                        this.Controls.Add(combobox); 
+                        this.Controls.Add(combobox);
                     }
                 }
-                
-                if (i>4 || CheckPersonAvailability(dateFrom.AddDays(i)) == 1)
+            }
+            #endregion
+        }
+        private void CheckAvailability()
+        {
+            #region CheckAvailability
+            //Weekend unavialable
+            for (i = 0; i < n; i++)
+            {
+                if (i > 4 || CheckPersonAvailability(dateFrom.AddDays(i)) == 1)
                 {
                     this.Controls.Find("Date" + i.ToString(), false)[0].Enabled = false;
                     for (j = 0; j < m; j++)
@@ -267,55 +363,15 @@ namespace BEAProjectManagement
                     }
                 }
             }
-
-            PopulateActivityComboBoxes();
-            PopulateWorkComboBoxes();
+            #endregion
         }
-
-        public class ComboboxItem
-        {
-            public ComboboxItem(string t, string v)
-            {
-                Text = t;
-                Value = v;
-            }
-            public string Text { get; set; }
-            public object Value { get; set; }
-
-            public override string ToString()
-            {
-                return Text;
-            }
-
-            public override bool Equals(object obj)
-            {
-                ComboboxItem item = obj as ComboboxItem;
-                if (item == null)
-                {
-                    return false;
-                }
-                return item.Value == this.Value;
-            }
-
-            public override int GetHashCode()
-            {
-                if (this.Value == null)
-                {
-                    return 0;
-                }
-                return this.Value.GetHashCode();
-            }
-        }
-
         private void PopulateActivityComboBoxes()
         {
+            //populate activity combo boxes and also work check boxes
             List<Tuple<string, string>> activities = new List<Tuple<string, string>>();
-
-                       
+            con.Open();                       
             com.CommandText = "pGetPersonProjectActivites";           
-            com.Parameters.Clear();
-            
-
+            com.Parameters.Clear();          
             SqlParameter pPersonID = new SqlParameter();
             pPersonID = com.Parameters.Add("@person", SqlDbType.Int);
             pPersonID.Direction = ParameterDirection.Input;
@@ -323,13 +379,11 @@ namespace BEAProjectManagement
 
             SqlParameter pProjectID = new SqlParameter();
             pProjectID = com.Parameters.Add("@project", SqlDbType.Int);
-            pProjectID.Direction = ParameterDirection.Input;
+            pProjectID.Direction = ParameterDirection.Input;  
 
-            ComboboxItem defaultCbI = new ComboboxItem("-", "0");
+            ComboboxItem defaultCbI = new ComboboxItem("-", "0");            
             for (int j = 0; j < projects.Count; j++)
             {
-
-
                 pProjectID.Value = projectIDs[j];
                 for (int i = 0; i < 7; i++)
                 {
@@ -338,7 +392,6 @@ namespace BEAProjectManagement
                     cmb.DisplayMember = "Text";
                     cmb.ValueMember = "Value";
                     cmb.SelectedIndex = 0;
-
                     try
                     {
                         using (SqlDataReader reader = com.ExecuteReader())
@@ -358,65 +411,84 @@ namespace BEAProjectManagement
                     }
                 }
             }
+            con.Close();
         }
-
         private void PopulateWorkComboBoxes()
         {
-            List<Tuple<string, string>> activities = new List<Tuple<string, string>>();
-
-            com.CommandText = "pGetPersonProjectActivitesWorks";
-            com.Parameters.Clear();
-
-            SqlParameter pPersonID = new SqlParameter();
-            pPersonID = com.Parameters.Add("@person", SqlDbType.Int);
-            pPersonID.Direction = ParameterDirection.Input;
-            pPersonID.Value = personID;
-
-            SqlParameter pProjectID = new SqlParameter();
-            pProjectID = com.Parameters.Add("@project", SqlDbType.Int);
-            pProjectID.Direction = ParameterDirection.Input;
-
+            List<Tuple<string, string>> activities = new List<Tuple<string, string>>(); 
             ComboboxItem defaultCbI = new ComboboxItem("-", "0");
             for (int j = 0; j < projects.Count; j++)
-            {
-                pProjectID.Value = projectIDs[j];
+            {               
                 for (int i = 0; i < 7; i++)
                 {
                     ComboBox cmb = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
                     cmb.Items.Add(defaultCbI);
                     cmb.DisplayMember = "Text";
                     cmb.ValueMember = "Value";
-                    cmb.SelectedIndex = 0;
-
-                    try
-                    {
-                        using (SqlDataReader reader = com.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                //ComboBox cmb = (ComboBox)this.Controls.Find("cmb" + i.ToString() + column.ToString(), false)[0];
-                                cmb.Items.Add(new ComboboxItem(reader.GetString(1), reader.GetInt32(0).ToString()));
-                            }
-                            reader.Close();
-                        }
+                    cmb.SelectedIndex = 0;                   
+                }
+            }            
+        }
+        private void ChangeWorkComboBoxesValues(int i, int j, int activityID)
+        {      
+            //Find the works of the specific activity
+            com.CommandText = "pGetActivityWorks";
+            com.Parameters.Clear();
+            SqlParameter pProjectActivityID = new SqlParameter();
+            pProjectActivityID = com.Parameters.Add("@projectactivity", SqlDbType.Int);
+            pProjectActivityID.Direction = ParameterDirection.Input;
+            pProjectActivityID.Value = activityID;
+            
+            //Find the work combobox    
+            ComboBox cmb = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
+            //Clear items except the initial
+            for (i = 1; i < cmb.Items.Count; i++) {
+                cmb.Items.Remove(cmb.Items[i]);
+            }
+            cmb.SelectedItem = cmb.Items[0];
+            try
+            {
+                con.Open();
+                using (SqlDataReader reader = com.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {                                
+                        cmb.Items.Add(new ComboboxItem(reader.GetString(1), reader.GetInt32(0).ToString()));
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("απέτυχε η προσπάθεια... ");
-                        MessageBox.Show(ex.Message);
-                        con.Close();
-                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("απέτυχε η προσπάθεια... ");
+                MessageBox.Show(ex.Message);
+                con.Close();
+            }
+            con.Close();  
+        }
+        private void ResetWorkComboBoxValue(int i, int j)
+        {
+            ComboboxItem defaultCbI = new ComboboxItem("-", "0");
+            ComboBox cmb = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
+            cmb.Items.Add(defaultCbI);
+            cmb.DisplayMember = "Text";
+            cmb.ValueMember = "Value";
+            cmb.SelectedIndex = 0;
+        }
+        private void GetWeekWorkedHours()
+        {
+            for (int j = 0; j < projects.Count; j++)
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    DateTime d = dateFrom.AddDays(i);
+                    GetDateWorkedHours(i,j,d);
                 }
             }
         }
-
-        private void GetWeekWorkedHours()
-        {
-            GetDateWorkedHours();
-        }
-
-        private void GetDateWorkedHours()
-        {
+        private void GetDateWorkedHours(int i, int j, DateTime day)
+        {           
+            //Get persons work
             com.CommandText = "GetPersonDateWorkedActivityWorkHours";          
             com.Parameters.Clear();
             SqlParameter pPersonID = new SqlParameter();
@@ -427,64 +499,59 @@ namespace BEAProjectManagement
             SqlParameter pDate = new SqlParameter();
             pDate = com.Parameters.Add("@date", SqlDbType.Date);
             pDate.Direction = ParameterDirection.Input;
-                    
 
-            for (int j = 0; j < projects.Count; j++)
+            pDate.Value = day; 
+            List<string> DataRead = new List<string>();
+            try
             {
-                for (int i = 0; i < 7; i++)
+                con.Open();
+                using (SqlDataReader reader = com.ExecuteReader())
                 {
-
-                    pDate.Value = dateFrom.AddDays(i);
-                    try
+                    while (reader.Read())
+                    {                              
+                        DataRead.Add(reader.GetString(1));
+                        DataRead.Add(reader.GetString(4));
+                        DataRead.Add(reader.GetInt32(2).ToString());
+                    }                            
+                }
+                con.Close();
+                if (DataRead.Count>0)
+                {
+                    ComboBox cmb = (ComboBox)this.Controls.Find("cmb" + i.ToString() + j.ToString(), false)[0];
+                    for (int k = 0; k < cmb.Items.Count; k++)
                     {
-                        using (SqlDataReader reader = com.ExecuteReader())
+                        if (((ComboboxItem)cmb.Items[k]).Text == DataRead[0])
                         {
-                            while (reader.Read())
-                            {
-                                ComboboxItem cbi = new ComboboxItem(reader.GetString(1), reader.GetInt32(0).ToString());                                
-                                ComboBox cmb = (ComboBox)this.Controls.Find("cmb" + i.ToString() + j.ToString(), false)[0];
-
-                                ComboboxItem cbiwork = new ComboboxItem(reader.GetString(4), reader.GetInt32(3).ToString());
-                                ComboBox cmbwork = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
-
-                                for (int k = 0; k < cmb.Items.Count; k++)
-                                {
-                                    if (((ComboboxItem)cmb.Items[k]).Text == cbi.Text)
-                                    {
-                                        cmb.SelectedIndex = k;
-                                        TextBox txt = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
-                                        txt.Text = reader.GetInt32(2).ToString();
-                                        break;
-                                    }                                   
-                                }
-
-                                for (int k = 0; k < cmbwork.Items.Count; k++)
-                                {
-                                    if (((ComboboxItem)cmbwork.Items[k]).Text == cbiwork.Text)
-                                    {
-                                        cmbwork.SelectedIndex = k;
-                                        break;
-                                    }
-                                }                               
-                            }
-                            reader.Close();
+                            cmb.SelectedIndex = k;
+                            break;
                         }
                     }
-                    catch (Exception ex)
+
+                    ComboBox cmbwork = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
+                    for (int k = 0; k < cmbwork.Items.Count; k++)
                     {
-                        MessageBox.Show("απέτυχε η προσπάθεια... ");
-                        MessageBox.Show(ex.Message);
-                        con.Close();
+                        if (((ComboboxItem)cmbwork.Items[k]).Text == DataRead[1])
+                        {
+                            cmbwork.SelectedIndex = k;
+                            break;
+                        }
                     }
+
+                    TextBox txt = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
+                    txt.Text = DataRead[2];
                 }
             }
-        }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("απέτυχε η προσπάθεια... ");
+                MessageBox.Show(ex.Message);
+                con.Close();
+            } 
+        }        
         private void button1_Click(object sender, EventArgs e)
         {
-            SetDateWorkedHours();
+             SetDateWorkedHours();
         }
-
         private void SetDateWorkedHours()
         {
             com.CommandText = "SetPersonDateWorkedActivityHours";          
@@ -537,11 +604,7 @@ namespace BEAProjectManagement
                     ComboBox cmb = (ComboBox)this.Controls.Find("cmb" + i.ToString() + j.ToString(), false)[0];
                     ComboboxItem selectedItem = (ComboboxItem)cmb.SelectedItem;
                     string selectedValue = (string)selectedItem.Value;
-
-                    ComboBox cmbwork = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
-                    ComboboxItem selectedworkItem = (ComboboxItem)cmbwork.SelectedItem;
-                   
-                    
+                                        
                     if (!String.IsNullOrEmpty(selectedValue))
                     {
                         DateTime date = dateFrom.AddDays(i);
@@ -550,8 +613,17 @@ namespace BEAProjectManagement
                         int activity = int.Parse(selectedValue);
                         pActivity.Value = activity;
 
-                        int work = int.Parse((string)selectedworkItem.Value);
-                        pWork.Value = work;
+                        ComboBox cmbwork = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
+                        if (cmbwork.SelectedItem != null)
+                        {
+                            ComboboxItem selectedworkItem = (ComboboxItem)cmbwork.SelectedItem;
+                            string selectedWorkValue = (string)selectedworkItem.Value;
+                            if (!String.IsNullOrEmpty(selectedWorkValue))
+                            {
+                                int work = int.Parse(selectedWorkValue);
+                                pWork.Value = work;
+                            }
+                        }
                         
                         TextBox txt = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
                         if (!String.IsNullOrEmpty(txt.Text))
@@ -585,7 +657,6 @@ namespace BEAProjectManagement
             MessageBox.Show("H καταχώρηση των ωρών της εβδομάδας " + dateFrom.ToString("dd /MM") + " έως " + dateFrom.AddDays(6).ToString("dd/MM") + " έγινε με επιτυχία!");
             SelectCalendarDate(selectedDate);
         }
-
         private int CheckPersonAvailability(DateTime day)
         {
             int availability = -1;
@@ -615,7 +686,7 @@ namespace BEAProjectManagement
             pDate.Value = day;
             try
             {
-                //con.Open();
+                con.Open();
                 try
                 {
                     com.ExecuteNonQuery();
@@ -636,11 +707,9 @@ namespace BEAProjectManagement
                 con.Close();
             }
 
-            //con.Close();
+            con.Close();
             return availability;
         }
     }
-           
-       
         
 }
