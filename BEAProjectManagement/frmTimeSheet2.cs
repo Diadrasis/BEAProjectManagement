@@ -19,8 +19,7 @@ namespace BEAProjectManagement
         public List<int> projectIDs;
         private SqlConnection con;
         private SqlCommand com;
-        public DateTime selectedDate;
-        private Boolean flag=true;
+        public DateTime selectedDate;        
         private int n, m;
         private int i, j;
         Point startLocation;
@@ -79,6 +78,8 @@ namespace BEAProjectManagement
         }
         private void SelectCalendarDate(DateTime dt)
         {
+            //privent button save activation
+            this.button1.Enabled = true;
             //select previous and following days
             CultureInfo greek = new CultureInfo("el-GR");            
             if ((int)dt.DayOfWeek != 0)
@@ -262,25 +263,22 @@ namespace BEAProjectManagement
             #endregion 
         }        
         private void ComboActivity_SelectedIndexChanged(object sender,  System.EventArgs e)
-        {
-            if (flag == true)
-            {
-                ComboBox comboBox = (ComboBox)sender;
-                int i = int.Parse(comboBox.Name.Substring(3, 1));
-                int j = int.Parse(comboBox.Name.Substring(4, 1));               
-                if (comboBox.SelectedIndex != 0)
-                {                    
-                    ComboboxItem cbi = (ComboboxItem)comboBox.SelectedItem;
-                    int activityID = int.Parse(cbi.Value.ToString());
-                    con.Close();
-                    ChangeWorkComboBoxesValues(i, j, activityID);
-                }
-                else
-                {                   
-                    ResetWorkComboBoxValue(i, j);
-                }
+        {           
+            ComboBox comboBox = (ComboBox)sender;
+            int i = int.Parse(comboBox.Name.Substring(3, 1));
+            int j = int.Parse(comboBox.Name.Substring(4, 1));               
+            if (comboBox.SelectedIndex != 0)
+            {                    
+                ComboboxItem cbi = (ComboboxItem)comboBox.SelectedItem;
+                int activityID = int.Parse(cbi.Value.ToString());
+                con.Close();
+                ChangeWorkComboBoxesValues(i, j, activityID);
+                               
             }
-            
+            else
+            {                   
+                ResetWorkComboBoxValue(i, j);
+            }  
         }       
         private void DesignActivitiesComboBoxes()
         {
@@ -438,14 +436,13 @@ namespace BEAProjectManagement
             pProjectActivityID = com.Parameters.Add("@projectactivity", SqlDbType.Int);
             pProjectActivityID.Direction = ParameterDirection.Input;
             pProjectActivityID.Value = activityID;
-            
+            SetDefaultWorkHours(i, j);
             //Find the work combobox    
             ComboBox cmb = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
             //Clear items except the initial
             for (i = 1; i < cmb.Items.Count; i++) {
                 cmb.Items.Remove(cmb.Items[i]);
-            }
-            cmb.SelectedItem = cmb.Items[0];
+            }            
             try
             {
                 con.Open();
@@ -464,7 +461,15 @@ namespace BEAProjectManagement
                 MessageBox.Show(ex.Message);
                 con.Close();
             }
-            con.Close();  
+            con.Close();
+            cmb.SelectedItem = cmb.Items[1];
+            
+        }
+        private void SetDefaultWorkHours(int i, int j)
+        {
+            //find the text box
+            TextBox tbx = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
+            tbx.Text = "8";
         }
         private void ResetWorkComboBoxValue(int i, int j)
         {
@@ -474,6 +479,13 @@ namespace BEAProjectManagement
             cmb.DisplayMember = "Text";
             cmb.ValueMember = "Value";
             cmb.SelectedIndex = 0;
+            ClearWorkHours(i, j);
+        }
+        private void ClearWorkHours(int i, int j)
+        {
+            //find the text box
+            TextBox tbx = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
+            tbx.Text = "";
         }
         private void GetWeekWorkedHours()
         {
@@ -613,31 +625,52 @@ namespace BEAProjectManagement
                         int activity = int.Parse(selectedValue);
                         pActivity.Value = activity;
 
-                        ComboBox cmbwork = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
-                        if (cmbwork.SelectedItem != null)
+                        //if no activity was selected, the row, if exists, will be deleted
+                        if (activity != 0)
                         {
-                            ComboboxItem selectedworkItem = (ComboboxItem)cmbwork.SelectedItem;
-                            string selectedWorkValue = (string)selectedworkItem.Value;
-                            if (!String.IsNullOrEmpty(selectedWorkValue))
+
+                            ComboBox cmbwork = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
+                            if (cmbwork.SelectedItem != null)
                             {
-                                int work = int.Parse(selectedWorkValue);
-                                pWork.Value = work;
+                                ComboboxItem selectedworkItem = (ComboboxItem)cmbwork.SelectedItem;
+                                string selectedWorkValue = (string)selectedworkItem.Value;
+                                if (!String.IsNullOrEmpty(selectedWorkValue))
+                                {
+                                    int work = int.Parse(selectedWorkValue);
+                                    pWork.Value = work;
+                                }
+                            }
+
+                            TextBox txt = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
+                            if (!String.IsNullOrEmpty(txt.Text))
+                            {
+                                int hours;
+                                if (int.TryParse(txt.Text, out hours))
+                                {
+                                    pHours.Value = hours;
+                                }
+                                else
+                                {
+                                    MessageBox.Show(txt.Text.ToString() + "δεν έχει καταχωρηθεί σωστά ο αριθμός των ωρών εργασίας!");
+                                    pHours.Value = 0;
+                                }
+
+                                try
+                                {
+                                    com.ExecuteNonQuery();
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show("απέτυχε η προσπάθεια... ");
+                                    MessageBox.Show(ex.Message);
+                                    con.Close();
+                                }
                             }
                         }
-                        
-                        TextBox txt = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
-                        if (!String.IsNullOrEmpty(txt.Text))
-                        {
-                            int hours;
-                            if (int.TryParse(txt.Text, out hours)){
-                                pHours.Value = hours;
-                            }
-                            else
-                            {
-                                MessageBox.Show(txt.Text.ToString() + " δεν είναι αριθμός!");
-                                pHours.Value = 0;
-                            }                            
-
+                        else
+                        {                            
+                            pWork.Value = 0;
+                            pHours.Value = 0;
                             try
                             {
                                 com.ExecuteNonQuery();
@@ -648,7 +681,7 @@ namespace BEAProjectManagement
                                 MessageBox.Show(ex.Message);
                                 con.Close();
                             }
-                        }                           
+                        }
                     }
                 }
             }

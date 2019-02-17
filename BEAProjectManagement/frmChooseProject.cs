@@ -21,6 +21,7 @@ namespace BEAProjectManagement
         {
             // TODO: This line of code loads data into the 'beaDBDataSet.vProjects' table. You can move, or remove it, as needed.
             this.vProjectsTableAdapter.Fill(this.beaDBDataSet.vProjects);
+            this.Text = "Επιλογή Έργου";
 
         }
 

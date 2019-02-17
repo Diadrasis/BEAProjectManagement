@@ -22,8 +22,8 @@ namespace BEAProjectManagement
         {
             // TODO: This line of code loads data into the 'beaDBDataSet.rptProjectReview' table. You can move, or remove it, as needed.
             this.rptProjectReviewTableAdapter.Fill(this.beaDBDataSet.rptProjectReview, projectID);
-
             this.reportViewer1.RefreshReport();
+            this.Text = "Αναφορά Έργου";
         }
     }
 }
