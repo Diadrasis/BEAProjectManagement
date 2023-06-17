@@ -545,12 +545,17 @@ namespace BEAProjectManagement
                         if (((ComboboxItem)cmbwork.Items[k]).Text == DataRead[1])
                         {
                             cmbwork.SelectedIndex = k;
+                            //values to the text box
+
+                            TextBox txt = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
+                            txt.Text = DataRead[2];
+
                             break;
                         }
                     }
 
-                    TextBox txt = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
-                    txt.Text = DataRead[2];
+                    //TextBox txt = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
+                    //txt.Text = DataRead[2];
                 }
             }
             catch (Exception ex)
@@ -628,7 +633,6 @@ namespace BEAProjectManagement
                         //if no activity was selected, the row, if exists, will be deleted
                         if (activity != 0)
                         {
-
                             ComboBox cmbwork = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
                             if (cmbwork.SelectedItem != null)
                             {
