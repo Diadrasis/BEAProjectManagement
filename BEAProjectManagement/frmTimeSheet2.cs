@@ -535,24 +535,25 @@ namespace BEAProjectManagement
                         if (((ComboboxItem)cmb.Items[k]).Text == DataRead[0])
                         {
                             cmb.SelectedIndex = k;
-                            break;
-                        }
-                    }
 
-                    ComboBox cmbwork = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
-                    for (int k = 0; k < cmbwork.Items.Count; k++)
-                    {
-                        if (((ComboboxItem)cmbwork.Items[k]).Text == DataRead[1])
-                        {
-                            cmbwork.SelectedIndex = k;
-                            //values to the text box
-
+                            //do the same for the second combobox
+                            ComboBox cmbwork = (ComboBox)this.Controls.Find("cmbwork" + i.ToString() + j.ToString(), false)[0];
+                            for (int l = 0; l< cmbwork.Items.Count; l++)
+                            {
+                                if (((ComboboxItem)cmbwork.Items[l]).Text == DataRead[1])
+                                {
+                                    cmbwork.SelectedIndex = l;
+                                    //values to the text box
+                                    break;
+                                }
+                            }
                             TextBox txt = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
                             txt.Text = DataRead[2];
-
                             break;
                         }
                     }
+
+                   
 
                     //TextBox txt = (TextBox)this.Controls.Find("txt" + i.ToString() + j.ToString(), false)[0];
                     //txt.Text = DataRead[2];
