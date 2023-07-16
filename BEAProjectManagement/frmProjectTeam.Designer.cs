@@ -30,8 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProjectTeam));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tblProjectTeamBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.tblProjectTeamBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -48,15 +49,7 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tblProjectTeamBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.tblProjectTeamDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.vPersonsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prteamRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prteamBudget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.availabilityIcon = new System.Windows.Forms.DataGridViewImageColumn();
-            this.availability = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.lblBudget = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -65,6 +58,15 @@
             this.tblProjectTeamTableAdapter = new BEAProjectManagement.beaDBDataSetTableAdapters.tblProjectTeamTableAdapter();
             this.tableAdapterManager = new BEAProjectManagement.beaDBDataSetTableAdapters.TableAdapterManager();
             this.vPersonsTableAdapter = new BEAProjectManagement.beaDBDataSetTableAdapters.vPersonsTableAdapter();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prteamWorkBudgetMonths = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prteamRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prteamBudget = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.availabilityIcon = new System.Windows.Forms.DataGridViewImageColumn();
+            this.availability = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tblProjectTeamBindingNavigator)).BeginInit();
             this.tblProjectTeamBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tblProjectTeamBindingSource)).BeginInit();
@@ -216,19 +218,20 @@
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
+            this.prteamWorkBudgetMonths,
             this.prteamRole,
             this.prteamBudget,
             this.availabilityIcon,
             this.availability});
             this.tblProjectTeamDataGridView.DataSource = this.tblProjectTeamBindingSource;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tblProjectTeamDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tblProjectTeamDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.tblProjectTeamDataGridView.Location = new System.Drawing.Point(150, 184);
             this.tblProjectTeamDataGridView.MultiSelect = false;
             this.tblProjectTeamDataGridView.Name = "tblProjectTeamDataGridView";
@@ -239,67 +242,10 @@
             this.tblProjectTeamDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblProjectTeamDataGridView_CellContentClick);
             this.tblProjectTeamDataGridView.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.tblProjectTeamDataGridView_RowValidated);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "prteamID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "prteamID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "projID";
-            this.dataGridViewTextBoxColumn2.HeaderText = "projID";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "personID";
-            this.dataGridViewTextBoxColumn3.DataSource = this.vPersonsBindingSource;
-            this.dataGridViewTextBoxColumn3.DisplayMember = "personName";
-            this.dataGridViewTextBoxColumn3.HeaderText = "personID";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewTextBoxColumn3.ValueMember = "personID";
-            // 
             // vPersonsBindingSource
             // 
             this.vPersonsBindingSource.DataMember = "vPersons";
             this.vPersonsBindingSource.DataSource = this.beaDBDataSet;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "prteamWorkBudget1";
-            this.dataGridViewTextBoxColumn4.HeaderText = "prteamWorkBudget";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // prteamRole
-            // 
-            this.prteamRole.DataPropertyName = "prteamRole";
-            this.prteamRole.HeaderText = "prteamRole";
-            this.prteamRole.Name = "prteamRole";
-            // 
-            // prteamBudget
-            // 
-            this.prteamBudget.DataPropertyName = "prteamBudget";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.prteamBudget.DefaultCellStyle = dataGridViewCellStyle1;
-            this.prteamBudget.HeaderText = "prteamBudget";
-            this.prteamBudget.Name = "prteamBudget";
-            // 
-            // availabilityIcon
-            // 
-            this.availabilityIcon.HeaderText = "availabilityIcon";
-            this.availabilityIcon.Image = global::BEAProjectManagement.Properties.Resources.availability;
-            this.availabilityIcon.Name = "availabilityIcon";
-            // 
-            // availability
-            // 
-            this.availability.HeaderText = "availability";
-            this.availability.Name = "availability";
             // 
             // label2
             // 
@@ -390,6 +336,72 @@
             // 
             this.vPersonsTableAdapter.ClearBeforeFill = true;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "prteamID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "prteamID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "projID";
+            this.dataGridViewTextBoxColumn2.HeaderText = "projID";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "personID";
+            this.dataGridViewTextBoxColumn3.DataSource = this.vPersonsBindingSource;
+            this.dataGridViewTextBoxColumn3.DisplayMember = "personName";
+            this.dataGridViewTextBoxColumn3.HeaderText = "personID";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewTextBoxColumn3.ValueMember = "personID";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "prteamWorkBudget1";
+            this.dataGridViewTextBoxColumn4.HeaderText = "prteamWorkBudget";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // prteamWorkBudgetMonths
+            // 
+            this.prteamWorkBudgetMonths.DataPropertyName = "prteamWorkBudgetMonths";
+            dataGridViewCellStyle1.Format = "N1";
+            dataGridViewCellStyle1.NullValue = null;
+            this.prteamWorkBudgetMonths.DefaultCellStyle = dataGridViewCellStyle1;
+            this.prteamWorkBudgetMonths.HeaderText = "prteamWorkBudgetMonths";
+            this.prteamWorkBudgetMonths.Name = "prteamWorkBudgetMonths";
+            // 
+            // prteamRole
+            // 
+            this.prteamRole.DataPropertyName = "prteamRole";
+            this.prteamRole.HeaderText = "prteamRole";
+            this.prteamRole.Name = "prteamRole";
+            // 
+            // prteamBudget
+            // 
+            this.prteamBudget.DataPropertyName = "prteamBudget";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.prteamBudget.DefaultCellStyle = dataGridViewCellStyle2;
+            this.prteamBudget.HeaderText = "prteamBudget";
+            this.prteamBudget.Name = "prteamBudget";
+            // 
+            // availabilityIcon
+            // 
+            this.availabilityIcon.HeaderText = "availabilityIcon";
+            this.availabilityIcon.Image = global::BEAProjectManagement.Properties.Resources.availability;
+            this.availabilityIcon.Name = "availabilityIcon";
+            // 
+            // availability
+            // 
+            this.availability.HeaderText = "availability";
+            this.availability.Name = "availability";
+            // 
             // frmProjectTeam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -453,6 +465,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prteamWorkBudgetMonths;
         private System.Windows.Forms.DataGridViewTextBoxColumn prteamRole;
         private System.Windows.Forms.DataGridViewTextBoxColumn prteamBudget;
         private System.Windows.Forms.DataGridViewImageColumn availabilityIcon;

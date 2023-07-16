@@ -44,7 +44,7 @@ namespace BEAProjectManagement
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
 
-            this.Size = new Size(950,600);
+            this.Size = new Size(980,600);
 
             dgv = this.tblProjectTeamDataGridView;
             bnv = this.tblProjectTeamBindingNavigator;
@@ -73,6 +73,10 @@ namespace BEAProjectManagement
 
             dgv.Columns["dataGridViewTextBoxColumn4"].HeaderText = "Απασχόληση - ΑΗ";
             dgv.Columns["dataGridViewTextBoxColumn4"].Width = 140;
+
+            dgv.Columns["prteamWorkBudgetMonths"].HeaderText = "ΑΜ";
+            dgv.Columns["prteamWorkBudgetMonths"].Width = 40;
+            DesignHelper.InactivateColumn(dgv, dgv.Columns["prteamWorkBudgetMonths"].Index);
 
             dgv.Columns["prteamBudget"].HeaderText = "Κόστος";
             dgv.Columns["prteamBudget"].Width = 100;

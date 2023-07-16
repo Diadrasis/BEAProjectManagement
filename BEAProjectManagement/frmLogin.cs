@@ -19,7 +19,7 @@ namespace BEAProjectManagement
         private void frmLogin_Load(object sender, EventArgs e)
         {
             this.Text = "Είσοδος";
-            this.label4.Text = "ver. 1.0.0.52";
+            this.label4.Text = "ver. 1.0.0.53";
         }
 
         private void button1_Click(object sender, EventArgs e)
